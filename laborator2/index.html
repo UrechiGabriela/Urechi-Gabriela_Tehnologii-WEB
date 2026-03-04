@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Campus Info Hub</title>
+  <link rel="stylesheet" href="styles/style.css" />
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="logo">Campus Info Hub</a>
+    <ul>
+      <li><a href="index.html" class="active">Acasa</a></li>
+      <li><a href="pages/library.html">Biblioteca</a></li>
+      <li><a href="pages/cafeteria.html">Cantina</a></li>
+      <li><a href="pages/events.html">Evenimente</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <h1>Campus Info Hub</h1>
+    <a href="#toate-resursele" class="btn">Vezi resursele</a>
+  </section>
+
+  <div class="container">
+    <section id="toate-resursele">
+      <h2 class="section-title">Toate Resursele</h2>
+      <p>
+        <a href="pages/library.html" class="jump-link">Exploreaza biblioteca</a>
+      </p>
+
+      <div class="filters">
+        <button class="filter-btn active" data-filter="all">Toate</button>
+        <button class="filter-btn" data-filter="library">Biblioteca</button>
+        <button class="filter-btn" data-filter="cafeteria">Cantina</button>
+        <button class="filter-btn" data-filter="event">Evenimente</button>
+        <button class="filter-btn" data-filter="study">Studiu</button>
+      </div>
+
+      <div id="resources-container"></div>
+    </section>
+
+    <section id="categorii">
+      <h2 class="section-title">Categorii</h2>
+      <p class="subtitle">Filtreaza resursele de mai sus</p>
+      <div id="tags-container" class="tags"></div>
+    </section>
+
+    <section id="resurse-externe">
+      <h2 class="section-title">Resurse Externe</h2>
+      <p>
+        <a href="https://www.bibnat.ro" target="_blank" class="jump-link external-link">
+          Biblioteca Nationala a Romaniei
+        </a>
+      </p>
+    </section>
+
+  </div>
+
+  <footer>
+    <p>© 2026 Campus Info Hub &nbsp;|&nbsp;
+      <a href="pages/library.html">Biblioteca</a> &nbsp;|&nbsp;
+      <a href="pages/cafeteria.html">Cantina</a> &nbsp;|&nbsp;
+      <a href="pages/events.html">Evenimente</a>
+    </p>
+  </footer>
+
+  <script src="scripts/main.js"></script>
+</body>
+</html>

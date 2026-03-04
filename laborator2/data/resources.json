@@ -1,0 +1,36 @@
+{
+  "resources": [
+    {
+      "id": 1,
+      "name": "Biblioteca Centrală",
+      "type": "library",
+      "location": "Clădirea A, Etaj 2",
+      "program": "Lun-Vin: 08:00-20:00 | Sâm: 09:00-14:00 | Dum: Închis",
+      "tags": ["study", "carti", "internet"]
+    },
+    {
+      "id": 2,
+      "name": "Cantina Studențească",
+      "type": "cafeteria",
+      "location": "Clădirea E, Etaj 1",
+      "program": "Lun-Vin: 07:00-18:00 | Sâm: 08:00-14:00 | Dum: Închis",
+      "tags": ["mancare", "pranz", "mic-dejun"]
+    },
+    {
+      "id": 3,
+      "name": "Conferința Anuală IT",
+      "type": "event",
+      "location": "Aula Mică",
+      "program": "15 Martie 2026 | 09:00-17:00",
+      "tags": ["eveniment", "IT", "networking"]
+    },
+    {
+      "id": 4,
+      "name": "Sala de Lectură",
+      "type": "study",
+      "location": "Biblioteca Centrală, Etaj 3",
+      "program": "Lun-Vin: 08:00-20:00 | Sâm: 09:00-14:00 | Dum: Închis",
+      "tags": ["study", "liniste", "individual"]
+    }
+  ]
+}
