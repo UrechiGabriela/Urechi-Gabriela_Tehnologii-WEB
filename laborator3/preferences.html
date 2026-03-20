@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Setări Preferințe</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="container">
+        <h1>Setări Preferințe</h1>
+
+        <form id="preferencesForm">
+            <label for="username">Nume utilizator</label>
+            <input type="text" id="username" name="username" placeholder="Introdu numele" />
+
+            <label for="theme">Tema</label>
+            <select id="theme" name="theme">
+                <option value="light">Luminos</option>
+                <option value="dark">Întunecat</option>
+            </select>
+
+            <label for="language">Limba</label>
+            <select id="language" name="language">
+                <option value="ro">Română</option>
+                <option value="en">English</option>
+                <option value="fr">Français</option>
+            </select>
+
+            <label for="fontSize">Dimensiune font</label>
+            <select id="fontSize" name="fontSize">
+                <option value="14px">14px</option>
+                <option value="16px">16px</option>
+                <option value="18px">18px</option>
+                <option value="20px">20px</option>
+            </select>
+
+            <button type="submit">Salvează preferințele</button>
+        </form>
+
+        <div id="messageBox"></div>
+    </div>
+
+    <script src="js/cookies.js"></script>
+    <script src="js/storage.js"></script>
+    <script>
+        function applyTheme(themeValue) {
+            const theme = themeValue === 'dark' ? 'dark' : 'light';
+            document.body.classList.remove('light', 'dark');
+            document.body.classList.add(theme);
+        }
+
+        function applyFontSize(sizeValue) {
+            document.body.style.fontSize = sizeValue || '16px';
+        }
+
+        function loadSavedPreferences() {
+            const savedUsername = CookieManager.get('username') || '';
+            const savedTheme = CookieManager.get('theme') || 'light';
+            const savedLanguage = StorageManager.getLocal('language') || 'ro';
+            const savedFontSize = StorageManager.getLocal('fontSize') || '16px';
+
+            document.getElementById('username').value = savedUsername;
+            document.getElementById('theme').value = (savedTheme === 'dark') ? 'dark' : 'light';
+            document.getElementById('language').value = ['ro', 'en', 'fr'].includes(savedLanguage) ? savedLanguage : 'ro';
+            document.getElementById('fontSize').value = ['14px', '16px', '18px', '20px'].includes(savedFontSize) ? savedFontSize : '16px';
+
+            applyTheme(savedTheme);
+            applyFontSize(savedFontSize);
+        }
+
+        document.getElementById('preferencesForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value.trim() || 'Vizitator';
+            const theme = document.getElementById('theme').value;
+            const language = document.getElementById('language').value;
+            const fontSize = document.getElementById('fontSize').value;
+
+            CookieManager.set('username', username, 365);
+            CookieManager.set('theme', theme, 365);
+            StorageManager.setLocal('language', language);
+            StorageManager.setLocal('fontSize', fontSize);
+
+            applyTheme(theme);
+            applyFontSize(fontSize);
+
+            const messageBox = document.getElementById('messageBox');
+            messageBox.innerHTML = '<div class="alert-success">Preferințele au fost salvate cu succes. Redirecționare...</div>';
+
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1500);
+        });
+
+        loadSavedPreferences();
+    </script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="container">
+        <h1>Autentificare</h1>
+
+        <div id="messageBox"></div>
+
+        <form id="loginForm">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required />
+
+            <label for="password">Parolă</label>
+            <input type="password" id="password" name="password" required />
+
+            <label style="display:flex; align-items:center; gap:8px; font-weight:600;">
+                <input type="checkbox" id="rememberMe" name="rememberMe" style="width:auto; margin:0;" />
+                Ține-mă minte
+            </label>
+
+            <button type="submit">Login</button>
+        </form>
+
+        <p>
+            Nu ai cont?
+            <a href="register.html">Înregistrează-te</a>
+        </p>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script>
+        const USERS_KEY = 'users';
+        const REMEMBERED_USER_KEY = 'rememberedUsername';
+        const SESSION_KEY = 'session';
+
+        const defaultUsers = [
+            { id: 1, username: 'admin', password: 'password', email: 'admin@example.com' },
+            { id: 2, username: 'student', password: 'student123', email: 'student@example.com' }
+        ];
+
+        function generateSessionId() {
+            if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
+            return 'sess-' + Math.random().toString(36).slice(2) + Date.now();
+        }
+
+        function showMessage(type, text) {
+            const box = document.getElementById('messageBox');
+            const cls = type === 'error' ? 'alert-error' : 'alert-success';
+            box.innerHTML = `<div class="${cls}">${text}</div>`;
+        }
+
+        function ensureDefaultUsers() {
+            const users = StorageManager.getLocal(USERS_KEY);
+            if (!Array.isArray(users) || users.length === 0) {
+                StorageManager.setLocal(USERS_KEY, defaultUsers);
+            }
+        }
+
+        function preloadRememberedUsername() {
+            const remembered = StorageManager.getLocal(REMEMBERED_USER_KEY);
+            if (remembered) {
+                document.getElementById('username').value = remembered;
+                document.getElementById('rememberMe').checked = true;
+            }
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const rememberMe = document.getElementById('rememberMe').checked;
+
+            const users = StorageManager.getLocal(USERS_KEY) || [];
+            const user = users.find(u => u.username === username && u.password === password);
+
+            if (!user) {
+                showMessage('error', 'Username sau parolă incorectă.');
+                return;
+            }
+
+            if (rememberMe) {
+                StorageManager.setLocal(REMEMBERED_USER_KEY, username);
+            } else {
+                StorageManager.removeLocal(REMEMBERED_USER_KEY);
+            }
+
+            const sessionData = {
+                userId: user.id,
+                username: user.username,
+                email: user.email,
+                loginTime: new Date().toISOString(),
+                sessionId: generateSessionId()
+            };
+
+            StorageManager.setSession(SESSION_KEY, sessionData);
+            showMessage('success', 'Autentificare reușită. Redirecționare...');
+
+            setTimeout(() => {
+                window.location.href = 'dashboard.html';
+            }, 800);
+        });
+
+        ensureDefaultUsers();
+        preloadRememberedUsername();
+    </script>
+</body>
+</html>
