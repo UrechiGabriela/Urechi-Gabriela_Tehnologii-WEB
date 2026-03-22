@@ -4,7 +4,6 @@ function showMessage(type, text) {
     const cls = type === 'error' ? 'alert-error' : 'alert-success';
     document.getElementById('messageBox').innerHTML = `<div class="${cls}">${text}</div>`;
 }
-
 function getUsers() {
     const users = StorageManager.getLocal(USERS_KEY);
     return Array.isArray(users) ? users : [];
@@ -13,7 +12,11 @@ function getUsers() {
 function isEmailValid(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
-
+function applyTheme() {
+    const theme = CookieManager.get('theme');
+    document.body.classList.remove('light', 'dark');
+    document.body.classList.add(theme === 'dark' ? 'dark' : 'light');
+}
 document.getElementById('registerForm').addEventListener('submit', function (e) {
     e.preventDefault();
     const username = document.getElementById('username').value.trim();
@@ -65,3 +68,4 @@ document.getElementById('registerForm').addEventListener('submit', function (e) 
         window.location.href = 'login.html';
     }, 1500);
 });
+applyTheme();

@@ -20,6 +20,11 @@ function ensureAuth() {
     }
     return true;
 }
+function applyTheme() {
+    const theme = CookieManager.get('theme');
+    document.body.classList.remove('light', 'dark');
+    document.body.classList.add(theme === 'dark' ? 'dark' : 'light');
+}
 
 function getCart() {
     const cart = StorageManager.getSession(CART_KEY);
@@ -107,4 +112,5 @@ document.getElementById('clearCartBtn').addEventListener('click', function () {
 if (ensureAuth()) {
     populateProducts();
     renderCart();
+    applyTheme();
 }

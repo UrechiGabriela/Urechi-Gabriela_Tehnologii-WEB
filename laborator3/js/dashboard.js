@@ -21,7 +21,11 @@ function getAllSessionRaw() {
     }
     return data;
 }
-
+function applyTheme() {
+    const theme = CookieManager.get('theme');
+    document.body.classList.remove('light', 'dark');
+    document.body.classList.add(theme === 'dark' ? 'dark' : 'light');
+}
 function renderRawSession() {
     document.getElementById('rawSession').textContent =
         JSON.stringify(getAllSessionRaw(), null, 2) || '{}';
@@ -64,3 +68,4 @@ document.getElementById('logoutBtn').addEventListener('click', function () {
 });
 
 initDashboard();
+applyTheme();

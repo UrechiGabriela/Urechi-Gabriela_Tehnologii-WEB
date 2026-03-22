@@ -6,7 +6,11 @@ const defaultUsers = [
     { id: 1, username: 'admin', password: 'password', email: 'admin@example.com' },
     { id: 2, username: 'student', password: 'student123', email: 'student@example.com' }
 ];
-
+function applyTheme() {
+    const theme = CookieManager.get('theme');
+    document.body.classList.remove('light', 'dark');
+    document.body.classList.add(theme === 'dark' ? 'dark' : 'light');
+}
 function generateSessionId() {
     if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
     return 'sess-' + Math.random().toString(36).slice(2) + Date.now();
@@ -63,3 +67,4 @@ setTimeout(() => {
 });
 ensureDefaultUsers();
 preloadRememberedUsername();
+applyTheme();
