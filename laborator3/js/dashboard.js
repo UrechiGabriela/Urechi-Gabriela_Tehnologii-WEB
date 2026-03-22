@@ -30,7 +30,6 @@ function renderRawSession() {
 function renderSessionInfo(sessionData) {
     const loginDate = new Date(sessionData.loginTime);
     const validLoginDate = !Number.isNaN(loginDate.getTime());
-
     const box = document.getElementById('sessionInfo');
     box.innerHTML = `
         <p><strong>ID Sesiune:</strong> ${sessionData.sessionId || '-'}</p>
@@ -39,26 +38,21 @@ function renderSessionInfo(sessionData) {
         <p><strong>Ora autentificării:</strong> ${validLoginDate ? loginDate.toLocaleString('ro-RO') : '-'}</p>
         <p><strong>Durata sesiunii:</strong> <span id="sessionDuration">00:00:00</span></p>
     `;
-
     const durationEl = document.getElementById('sessionDuration');
     const start = validLoginDate ? loginDate.getTime() : Date.now();
-
     const tick = () => {
         durationEl.textContent = formatDuration(Date.now() - start);
     };
     tick();
-
     timerId = setInterval(tick, 1000);
 }
 
 function initDashboard() {
     const sessionData = StorageManager.getSession(SESSION_KEY);
-
     if (!sessionData || !sessionData.sessionId) {
         window.location.href = 'login.html';
         return;
     }
-
     renderSessionInfo(sessionData);
     renderRawSession();
 }

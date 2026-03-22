@@ -6,30 +6,24 @@ function esc(text) {
         .replaceAll('"', '&quot;')
         .replaceAll("'", '&#039;');
 }
-
 function bytesLength(value) {
     return new TextEncoder().encode(String(value)).length;
 }
-
 function applyTheme() {
     const theme = CookieManager.get('theme');
     document.body.classList.remove('light', 'dark');
     document.body.classList.add(theme === 'dark' ? 'dark' : 'light');
 }
-
 function renderCookies() {
     document.getElementById('rawCookies').textContent = document.cookie || '(gol)';
-
     const data = CookieManager.getAll();
     const tbody = document.querySelector('#cookiesTable tbody');
     tbody.innerHTML = '';
-
     const entries = Object.entries(data);
     if (!entries.length) {
         tbody.innerHTML = '<tr><td colspan="4">Nu există cookies</td></tr>';
         return;
     }
-
     entries.forEach(([name, value]) => {
         const row = document.createElement('tr');
         row.innerHTML = `
@@ -40,7 +34,6 @@ function renderCookies() {
         `;
         tbody.appendChild(row);
     });
-
     tbody.querySelectorAll('button[data-cookie]').forEach(btn => {
         btn.addEventListener('click', () => {
             const cookieName = btn.getAttribute('data-cookie');
@@ -53,20 +46,16 @@ function renderCookies() {
 function renderLocal() {
     const data = StorageManager.getAllLocal();
     document.getElementById('localJson').textContent = JSON.stringify(data, null, 2) || '{}';
-
     const tbody = document.querySelector('#localTable tbody');
     tbody.innerHTML = '';
-
     const entries = Object.entries(data);
     if (!entries.length) {
         tbody.innerHTML = '<tr><td colspan="4">localStorage este gol</td></tr>';
         return;
     }
-
     entries.forEach(([key, value]) => {
         const printable = typeof value === 'object' ? JSON.stringify(value) : String(value);
         const size = bytesLength(printable);
-
         const row = document.createElement('tr');
         row.innerHTML = `
             <td>${esc(key)}</td>
@@ -76,7 +65,6 @@ function renderLocal() {
         `;
         tbody.appendChild(row);
     });
-
     tbody.querySelectorAll('button[data-local]').forEach(btn => {
         btn.addEventListener('click', () => {
             const key = btn.getAttribute('data-local');
@@ -89,20 +77,16 @@ function renderLocal() {
 function renderSession() {
     const data = StorageManager.getAllSession();
     document.getElementById('sessionJson').textContent = JSON.stringify(data, null, 2) || '{}';
-
     const tbody = document.querySelector('#sessionTable tbody');
     tbody.innerHTML = '';
-
     const entries = Object.entries(data);
     if (!entries.length) {
         tbody.innerHTML = '<tr><td colspan="4">sessionStorage este gol</td></tr>';
         return;
     }
-
     entries.forEach(([key, value]) => {
         const printable = typeof value === 'object' ? JSON.stringify(value) : String(value);
         const size = bytesLength(printable);
-
         const row = document.createElement('tr');
         row.innerHTML = `
             <td>${esc(key)}</td>
@@ -112,7 +96,6 @@ function renderSession() {
         `;
         tbody.appendChild(row);
     });
-
     tbody.querySelectorAll('button[data-session]').forEach(btn => {
         btn.addEventListener('click', () => {
             const key = btn.getAttribute('data-session');
@@ -121,12 +104,10 @@ function renderSession() {
         });
     });
 }
-
 function refreshAll() {
     applyTheme();
     renderCookies();
     renderLocal();
     renderSession();
 }
-
 refreshAll();
