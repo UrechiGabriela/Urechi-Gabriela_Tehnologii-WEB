@@ -39,7 +39,7 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
     const users = StorageManager.getLocal(USERS_KEY) || [];
     const user = users.find(u => u.username === username && u.password === password);
     if (!user) {
-        showMessage('error', 'Username sau parolă incorectă');
+        showMessage('error', 'Username sau parola incorecta');
         return;
     }
     if (rememberMe) {

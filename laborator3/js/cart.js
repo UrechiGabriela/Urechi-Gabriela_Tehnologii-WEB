@@ -48,7 +48,7 @@ function renderCart() {
     let total = 0;
     const entries = Object.entries(cart).filter(([k, q]) => products[k] && Number(q) > 0);
     if (!entries.length) {
-        tbody.innerHTML = '<tr><td colspan="4">Coșul este gol</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="4">Cosul este gol</td></tr>';
         totalEl.textContent = '0';
         return;
     }
@@ -87,20 +87,20 @@ document.getElementById('addToCartForm').addEventListener('submit', function (e)
         return;
     }
     if (!Number.isInteger(quantity) || quantity < 1 || quantity > 10) {
-        showMessage('error', 'Cantitatea trebuie să fie între 1 și 10');
+        showMessage('error', 'Cantitatea trebuie sa fie între 1 și 10');
         return;
     }
     const cart = getCart();
     cart[key] = (Number(cart[key]) || 0) + quantity; 
     saveCart(cart);
-    showMessage('success', 'Produs adăugat în coș');
+    showMessage('success', 'Produs adaugat în cos');
     this.reset();
     document.getElementById('quantity').value = 1;
     renderCart();
 });
 document.getElementById('clearCartBtn').addEventListener('click', function () {
     saveCart({});
-    showMessage('success', 'Coșul a fost golit');
+    showMessage('success', 'Cosul a fost golit');
     renderCart();
 });
 
