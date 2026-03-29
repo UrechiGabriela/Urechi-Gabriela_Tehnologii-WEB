@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="calculator">
+        <div id="display" class="display">0</div>
+        
+        <div class="buttons">
+            <button data-type="action" data-value="C" class="btn-clear">C</button>
+            <button data-type="operator" data-value="/">/</button>
+            <button data-type="operator" data-value="*">*</button>
+            <button data-type="operator" data-value="-">-</button>
+            
+            <button data-type="digit" data-value="7">7</button>
+            <button data-type="digit" data-value="8">8</button>
+            <button data-type="digit" data-value="9">9</button>
+
+            <button data-type="operator" data-value="+">+</button>
+            
+            <button data-type="digit" data-value="3">3</button>
+            <button data-type="digit" data-value="4">4</button>
+            <button data-type="digit" data-value="5">5</button>
+            <button data-type="digit" data-value="6">6</button>
+            <button data-type="digit" data-value="1">1</button>
+            <button data-type="digit" data-value="2">2</button>
+            
+            <button data-type="digit" data-value="0" class="btn-zero">0</button>
+            <button data-type="action" data-value="=" class="btn-equals">=</button>
+        </div>
+    </div>
+<script src="model.js" ></script>
+<script src="view.js" ></script>
+<script src="controller.js" ></script>
+
+</body>
+</html>
