@@ -1,0 +1,77 @@
+/* file upload */
+input[type="file"] { display: none; }
+.file-input-label { display: inline-block; background: var(--primary-color); color: white; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 14px; transition: 0.2s; text-align: center; width: 100%; box-sizing: border-box; }
+.file-input-label:hover { background: var(--hover-color); }
+.upload-card { background: white; border-radius: 16px; padding: 25px; border: 2px dashed #fcdbc4; text-align: center; margin-top: 30px;}
+.upload-card form { display: flex; flex-direction: column; gap: 12px; }
+.upload-card input[type="text"], .upload-card input[type="file"] { width: 100%; border: none; background: #f8fafc; border-radius: 8px; padding: 12px; font-size: 13px; outline: none; }
+.btn-upload { background: var(--primary-color); color: white; border: none; padding: 14px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 14px; transition: 0.2s; width: 100%;}
+.btn-upload:hover { background: var(--hover-color); }
+
+/* gallery */
+.page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; margin-top: 10px;}
+.page-title-text { font-size: 22px; font-weight: 700; margin: 0; }
+.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 30px; padding-bottom: 40px; }
+.image-card, .folder-card { background: white; border-radius: 20px; overflow: hidden; border: none; display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
+.image-card:hover, .folder-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+.image-card img { width: 100%; height: 180px; object-fit: cover; cursor: zoom-in; }
+.image-info { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+.image-title-container { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+.image-title { font-weight: 700; color: var(--text-dark); font-size: 15px; word-wrap: break-word; max-width: 80%; line-height: 1.4;}
+.btn-edit { background: none; border: none; cursor: pointer; color: var(--text-muted); font-size: 15px; padding: 0; transition: 0.2s;}
+.btn-edit:hover { color: var(--primary-color); }
+.image-meta { margin-top: auto; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-color); padding-top: 15px; }
+.image-size { font-weight: 700; color: var(--text-muted); font-size: 12px; }
+.image-date { display: block; color: var(--sidebar-text); font-size: 12px; margin-top: 6px; font-weight: 500; }
+.action-group { display: flex; gap: 12px; }
+.action-btn { background: none; border: none; cursor: pointer; font-size: 16px; color: var(--text-muted); padding: 0; transition: 0.2s; }
+.action-btn:hover { color: var(--primary-color); transform: scale(1.1); }
+.btn-del:hover { color: #ef4444; }
+
+.empty-state-text { color: var(--text-muted); font-size: 15px; margin-top: 10px; }
+.inline-form { margin: 0; }
+.fav-active { color: #f6ad55; background: transparent; border: none; }
+.action-btn.btn-del:hover { background: #fee2e2; color: #ef4444; border-color: #fecaca; }
+
+/* modale */
+.modal-content select { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 13px; font-weight: 600; color: var(--text-dark); background: white; cursor: pointer; display: block; height: auto; }
+.btn-modal-cancel { flex: 1; border: 1px solid #cbd5e1; padding: 10px; border-radius: 8px; cursor: pointer; font-weight: 600; color: var(--text-dark); background: white; transition: 0.2s; display: block; text-align: center; height: auto; line-height: 1.2; text-decoration: none; }
+.btn-modal-cancel:hover { background: #f1f5f9; }
+.rename-input { width: 100%; padding: 14px; margin-bottom: 25px; border-radius: 10px; border: 1px solid var(--border-color); background: #f8fafc; outline: none; font-size: 14px; box-sizing: border-box; }
+.rename-input:focus { border-color: var(--primary-color); }
+.btn-cancel-modal { flex: 1; padding: 14px; border-radius: 8px; font-weight: 600; cursor: pointer; border: 1px solid #cbd5e1; background: white; color: var(--text-dark); transition: 0.2s; }
+.btn-cancel-modal:hover { background: #f8fafc; }
+.btn-submit-modal { flex: 1; padding: 14px; border-radius: 8px; font-weight: 600; cursor: pointer; border: none; background: var(--primary-color); color: white; transition: 0.2s; }
+.btn-submit-modal:hover { background: var(--hover-color); }
+.text-center { text-align: center; }
+.icon-danger { width: 56px; height: 56px; margin: 0 auto 18px; border-radius: 50%; background: #fef2f2; color: #ef4444; display: flex; align-items: center; justify-content: center; font-size: 30px; font-weight: 800; }
+.modal-btn { flex: 1; padding: 14px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 14px; transition: 0.2s; border: 1px solid transparent; }
+.modal-btn-cancel { background: white; color: var(--text-dark); border-color: #cbd5e1; }
+.modal-btn-cancel:hover { background: #f8fafc; }
+.modal-btn-danger { background: #ef4444; color: white; }
+.modal-btn-danger:hover { background: #dc2626; }
+
+
+@media (max-width: 900px) {
+    .gallery { grid-template-columns: repeat(2, 1fr); gap: 10px; padding-bottom: 20px; }
+    .image-card { border-radius: 12px; }
+    .image-card img { height: 120px; }
+    .image-info { padding: 10px; }
+    .image-title { font-size: 12px; max-width: 100%; }
+    .action-group { gap: 8px; }
+    .action-btn { font-size: 14px; }
+    .image-meta { border-top: none; padding-top: 8px; }
+    .image-size { font-size: 11px; }
+    .image-date { font-size: 10px; margin-top: 3px; }
+    
+    .upload-card { padding: 12px; margin-top: 15px; border-radius: 12px; }
+    .file-input-label { display: block; padding: 10px 12px; border-radius: 6px; font-size: 12px; }
+    
+    .modal-content input, .rename-input { padding: 10px 12px; font-size: 12px; margin-bottom: 15px; }
+    .modal-content select { padding: 10px 12px; font-size: 12px; margin-bottom: 15px; }
+    .modal-btn, .btn-cancel-modal, .btn-submit-modal { padding: 11px 12px; font-size: 13px; }
+    .icon-danger { width: 45px; height: 45px; margin: 0 auto 12px; font-size: 24px; }
+    
+    .page-title-text { font-size: 16px; }
+    .page-header { margin-bottom: 15px; }
+}
